@@ -29,7 +29,8 @@ class UsersController < ApplicationController
       session[:current_user_id] = user.id 
       redirect_to users_home_path(user) 
     else
-      render "login", :alert => 'Incorrect email or password' 
+      flash[:notice] = "Invalid username/password combination!!"
+      render "login"
     end
   end
 
