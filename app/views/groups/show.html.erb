@@ -1,0 +1,39 @@
+<h1><%= @current_user.name %>'s Groups and Its Members</h1>
+
+<% if @current_user.groups.any? %>
+<table >
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th>Users</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @current_user.groups.each do |group| %>
+      <tr>
+        <td><%= group.name %></td>
+        <td></td>
+        <td><%= group.users.map {|c| c.name}.join(', ') %></td>
+        <td></td>
+        <td><%= link_to 'Add Bill', new_group_bill_path(group) %></td>
+        <td></td>        
+        <td><%= link_to 'Edit', edit_group_path(group) %></td>
+        <td></td>
+        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td></td>
+        <td><%= link_to 'Show', groups_home_path(group)%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <p>No Groups Found</p>
+<% end %>
+
+<%= link_to 'Back', users_home_path %>

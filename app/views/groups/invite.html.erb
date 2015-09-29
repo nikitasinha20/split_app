@@ -1,0 +1,9 @@
+
+<div>
+  <h1>Invite Friends</h1>
+  <p><strong>Enter Friend's Email id:</strong></p>
+  <%= form_tag(:action => 'send_invite') do %>
+    <p>Email:</br> <%= text_field_tag(:email) %></p> 
+    <%= submit_tag("Invite") %>
+  <% end %>
+</div>

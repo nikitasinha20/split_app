@@ -1,0 +1,38 @@
+<%= form_for @bill, url: group_bills_path do |f| %>
+  <% if @bill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bill.errors.count, "error") %> prohibited the Bill from being created:</h2>
+      <ul>
+      <% @bill.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div> 
+    <%= f.label :details %><br>
+    <%= f.text_area :details %>
+  </div>
+
+  <div> 
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label :paid_by %><br>
+    <% for user in @group.users.all %>  
+    <div>  
+      <%= f.radio_button :paid_by, user.id %>  
+      <%= user.name %>  
+    </div>  
+  </div>
+  <% end %>
+
+  <%= f.hidden_field :group_id, :value => @group.id %>
+  <br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>  

@@ -1,0 +1,7 @@
+<h1> <%= @current_user.name %>'s Dashboard </h1>
+
+
+<p><%= link_to 'My groups', :controller => "groups", :action => "show", :user_id => params[:id]  %></p>
+<p><%= link_to 'New Group', new_group_path  %></p>
+<p><%= link_to 'Edit Profile', edit_user_path(@current_user)%></p>
+<p><%= link_to 'Logout', root_path  %></p>

@@ -1,0 +1,41 @@
+<h1>Hi</h1>
+
+<%= @current_user.groups.map {|group| group.name} %>
+<% @current_user.groups.each do |group| %>
+<h1> true </h1>
+
+<h1><%= group.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th>Item</th>
+      <th></th>
+      <th>Amount</th>
+      <th></th>
+      <th>Paid By</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% group.bills.each do |bill| %>
+      <tr>
+        <td><%= bill.created_at.to_date %></td>
+        <td></td>
+        <td><%= bill.details %></td>
+        <td></td>
+        <td><%= bill.amount %></td> 
+        <td></td>       
+        <td><%= User.find(bill.paid_by).name %></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+

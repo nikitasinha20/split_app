@@ -1,0 +1,58 @@
+<h1><%= @group.name %> selected </h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Item</th>
+      <th>Amount</th>
+      <th>Paid By</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group.bills.each do |bill| %>
+      <tr>
+        <td><%= bill.created_at.to_date %></td>
+        <td><%= bill.details %></td>
+        <td><%= bill.amount %></td> 
+        <td><%= User.find(bill.paid_by).name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<br>
+
+<% @group.users.each do |user| %>
+  <strong>User <%= user.name %> report </strong><br>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>For <%= user.name %> in group <%= @group.name %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Member</td>
+        <% @group.users.sort.each do |u| %>
+          <% if !u.eql?user %> 
+            <td><%= u.name %></td>
+          <% end %>
+        <% end %>
+      </tr>
+      <tr>
+        <td><%= user.name %></td>
+        <% @group.users.sort.each do |u| %>
+          <% if !u.eql?user %> 
+            <td><%= User.balance user, u, @group %></td>
+          <% end %>
+        <% end %>
+       </tr>
+    </tbody>
+  </table>
+  <br>
+  <br>
+<% end %>
+
+<%= link_to 'Back', group_path(@group) %>

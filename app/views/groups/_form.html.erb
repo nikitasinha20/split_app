@@ -1,0 +1,33 @@
+<%= form_for @group do |f| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this Group from being created:</h2>
+      <ul>
+      <% @group.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :users %><br>
+    <% for user in User.all %>  
+      <div>  
+        <%= check_box_tag "group[user_ids][]", user.id, (@current_user.eql?(user) ? true : @group.users.include?(user)), :style => ('visibility: hidden' if @current_user.eql?(user))%>  
+        <%= user.name %>  
+      </div>  
+    <% end %>
+    <br>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>  
